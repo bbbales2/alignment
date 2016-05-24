@@ -34,7 +34,7 @@ for i in range(len(ims) - 1):
             
             im2 = numpy.roll(im2, dx, axis = 1)
             im2 = numpy.roll(im2, dy, axis = 0)
-            mass = (ims[i] * im2).sum()
+            mass = (numpy.abs(ims[i] - im2)).sum()
             results[(dy, dx)] = mass
             
             xsum += mass * dx
@@ -48,7 +48,7 @@ for i in range(len(ims) - 1):
     
     print xsum, ysum
     
-    shifts.append(sorted(results.items(), key = lambda x : x[1], reverse = True)[0][0])
+    shifts.append(sorted(results.items(), key = lambda x : x[1], reverse = False)[0][0])
     #plt.imshow(toplot, interpolation = 'NONE')
     #plt.show()
     print i
